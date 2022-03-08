@@ -1,0 +1,15 @@
+branch-defaults:
+  default:
+    environment: Udagramapi-env
+  master:
+    default_ec2_keyname: e-7pzr3mitap
+    default_region: us-east-1
+    environment: Udagramapi-env
+deploy:
+  artifact: www/Archive.zip
+global:
+  application_name: udagram-api
+  default_ec2_keyname: e-7pzr3mitap
+  default_region: us-east-1
+  environment: Udagramapi-env
+  workspace_type: Application
