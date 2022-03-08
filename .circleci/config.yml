@@ -11,52 +11,47 @@ orbs:
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-deploy-backend:
+  build-and-deploy:
    
     docker:
       - image: cimg/node:16.10
     steps:
       # Checkout the code as the first step.
+      - node/install
       - checkout
       - aws-cli/setup
       - eb/setup
+
       - run:
-        name: Go to backend directory
-        command: cd udagram-api
+        name: Install backend dependencies
+        command: |
+          npm run backend:install
+
+      - run:
+        name: Install frontend dependencies
+        command: |
+          npm run frontend:install
       
-      - node/install-packages:
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+      - run:
+        name: Build backend 
+        command: |
+          npm run backend:build
 
       - run:
-          name: Deploy
-          command: |
-            npm run build
-            npm run deploy
-
-  build-deploy-frontend:
-   
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      # Checkout the code as the first step.
-      - run:
-        name: Go to frontend directory
-        command: cd ../udagram-frontend
-
-      - node/install-packages:
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+        name: Build frontend 
+        command: |
+          npm run frontend:build
 
       - run:
-          name: Deploy
-          command: |
-            npm run build
-            npm run deploy
-workflows:
-  
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  sample:
-    jobs:
-      - build-deploy-backend
-      - build-deploy-frontend
+        name: Deploy backend 
+        command: |
+          npm run backend:deploy
+
+      - run:
+        name: Deploy frontend 
+        command: |
+          npm run frontend:deploy
+      
+      
+      
+      
