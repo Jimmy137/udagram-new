@@ -17,7 +17,9 @@ jobs:
       - checkout
       - aws-cli/setup
       - eb/setup
-      - node/install
+      - node/install-packages:
+          # If you are using yarn, change the line below from "npm" to "yarn"
+          pkg-manager: npm
       - run:
           name: Install backend dependencies
           command: |
