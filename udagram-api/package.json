@@ -11,7 +11,8 @@
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "eb use Udagramapi-env && eb deploy --staged"
+    "deploy": "chmod +x bin/deploy.sh && bin/deploy.sh",
+    "deploy-loc": "eb use Udagramapi-env && eb deploy --staged"
   },
   "keywords": [],
   "author": "Gabriel Ruttner",

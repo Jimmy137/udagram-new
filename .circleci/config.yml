@@ -35,6 +35,10 @@ jobs:
           command: |
             npm run frontend:build
       - run:
+          name: Test
+          command: |
+            npm run test
+      - run:
           name: Deploy backend 
           command: |
             npm run backend:deploy
@@ -49,7 +53,10 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample:
     jobs:
-      - build-and-deploy
+      - build-and-deploy:
+          filters:
+            branches:
+              only: main
       
       
       
