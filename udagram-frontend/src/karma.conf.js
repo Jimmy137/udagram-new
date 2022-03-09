@@ -26,7 +26,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    CHROME_BIN='/usr/bin/chromium',
+    CHROME_BIN: '/usr/bin/chromium',
     singleRun: false
   });
 };
